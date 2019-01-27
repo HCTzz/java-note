@@ -1,0 +1,19 @@
+java api 中常用的函数式接口
+
+函数式接口                  函数描述符                原始类型特化
+
+1、Predicate<T>             T > Boolean         
+
+2、Consumer<T>              T > void
+
+3、Function<T,R>            T > R
+
+4、Supplier<T>              () > T
+
+5、UnaryOperator<T>         T -> T
+
+6、BiPredicate<L,R>        (L,R) -> Boolean
+
+7、BiConsumer<T,U>         (T,R) -> void
+
+8、BiFunction<T,U,R>       (T,U,R) -> void
