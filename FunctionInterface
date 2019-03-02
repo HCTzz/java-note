@@ -92,3 +92,19 @@ List<Integer> l = map(
 从一个对象中选择/提取     (String s) -> s.length()                                Function<String, Integer>或ToIntFunction<String>
 合并两个值               (int a, int b) -> a * b                                IntBinaryOperator
 比较两个对象 (Apple a1, Apple a2) ->a1.getWeight().compareTo(a2.getWeight())     Comparator<Apple>或BiFunction<Apple, Apple, Integer>或 ToIntBiFunction<Apple, Apple> 
+
+Collector接口
+public interface Collector<T, A, R> {
+ Supplier<A> supplier();
+ BiConsumer<A, T> accumulator();
+ Function<A, R> finisher();
+ BinaryOperator<A> combiner();
+ Set<Characteristics> characteristics();
+}
+本列表适用以下定义。
+1、 T是流中要收集的项目的泛型。
+2、 A是累加器的类型，累加器是在收集过程中用于累积部分结果的对象。
+3、 R是收集操作得到的对象（通常但并不一定是集合）的类型。
+例如，你可以实现一个ToListCollector<T>类，将Stream<T>中的所有元素收集到一个
+List<T>里，它的签名如下：
+public class ToListCollector<T> implements Collector<T, List<T>, List<T>> 
