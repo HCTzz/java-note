@@ -158,3 +158,34 @@ quotes：属性
 3、inherit	规定应该从父元素继承 quotes 属性的值。
 
 @page 设置页面打印相关的内容
+
+
+SVG
+
+path元素是SVG基本形状中最强大的一个，它不仅能创建其他基本形状，还能创建更多其他形状。
+你可以用path元素绘制矩形（直角矩形或者圆角矩形）、圆形、椭圆、折线形、多边形，以及一些其他的形状，
+例如贝塞尔曲线、2次曲线等曲线。
+path元素的形状是通过属性d来定义的，属性d的值是一个“命令+参数”的序列。
+下面的命令可用于路径数据：
+
+M = moveto
+L = lineto
+H = horizontal lineto 水平
+V = vertical lineto  竖直
+C = curveto  曲线
+S = smooth curveto  光滑的曲线
+Q = quadratic Bézier curve
+T = smooth quadratic Bézier curveto  
+A = elliptical Arc  椭圆形的弧
+Z = closepath  闭合路径
+
+A ：
+参数：(rx ry x-axis-rotation large-arc-flag sweep-flag x y)+rx 
+ry 是椭圆的两个半轴的长度。
+x-axis-rotation 是椭圆相对于坐标系的旋转角度，角度数而非弧度数。
+large-arc-flag 是标记绘制大弧(1)还是小弧(0)部分。
+sweep-flag 是标记向顺时针(1)还是逆时针(0)方向绘制。x y 是圆弧终点的坐标。
+描述：从当前点绘制一段椭圆弧到点 (x, y)，椭圆的大小和方向由 (rx, ry) 和 x-axis-rotation 参数决定，
+x-axis-rotation 参数表示椭圆整体相对于当前坐标系统的旋转角度。
+椭圆的中心坐标?(cx, cy) 会自动进行计算从而满足其它参数约束。
+large-arc-flag 和 sweep-flag 也被用于圆弧的计算与绘制。

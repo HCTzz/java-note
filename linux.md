@@ -16,8 +16,6 @@ ps -ef | grep 程序名
 ? TIME+：自进程启动到目前为止的CPU时间总量。
 ? COMMAND：进程所对应的命令行名称，也就是启动的程序名
 
-
-
 1 HUP 挂起
 2 INT 中断
 3 QUIT 结束运行
@@ -28,8 +26,9 @@ ps -ef | grep 程序名
 18 TSTP 停止或暂停，但继续在后台运行
 19 CONT 在STOP或TSTP之后恢复执行
 
-df -h
-
+df -h    du是用户级程序，不考虑Meta Data（系统为自身分配的一些磁盘块）.应用程序打开的文件句柄没有关闭的话，会造成df命令显示的剩余磁盘空间少。而du则不会。
+		 lsof | grep /tmp/ 	输出的结果中，注意某些含有“(deleted)”字样的记录，它们中的一部分就是罪魁祸首，将它们kill掉即可
+		 (如果可以重启这些进程所对应的服务的话，也有可能解决问题）。
 du 
 ? -c：显示所有已列出文件总的大小。
 ? -h：按用户易读的格式输出大小，即用K替代千字节，用M替代兆字节，用G替代吉字节。
@@ -165,3 +164,64 @@ coproc My_Job { sleep 10; }
 
 
 理解 shell 的内建命令
+1、 外部命令
+外部命令，有时候也被称为文件系统命令，是存在于bash shell之外的程序。它们并不是shell
+程序的一部分。外部命令程序通常位于/bin、/usr/bin、/sbin或/usr/sbin中。
+ps就是一个外部命令。你可以使用which和type命令找到它。
+which ps
+type -a ps 
+
+2、内建命令
+内建命令和外部命令的区别在于前者不需要使用子进程来执行。它们已经和shell编译成了一
+体，作为shell工具的组成部分存在。不需要借助外部程序文件来运行。
+cd和exit命令都内建于bash shell。可以利用type命令来了解某个命令是否是内建的。
+type cd
+
+3、history
+ history -a  可以在退出shell会话之前强制将命令历史记录写入.bash_history文件
+ history -n  强制重新读取.bash_history文件，更新终端会话的历史记录
+ !20  		 输入惊叹号和命令在历史列表中的编号以唤回历史列表中任意一条命令
+
+4、全局环境变量
+ printenv 系统为bash shell设置的全局环境变量数目众多，我们不得不在展示的时候进行删减。
+		  其中有很多是在登录过程中设置的，另外，你的登录方式也会影响到所设置的环境变量。
+		  要显示个别环境变量的值，可以使用printenv命令，但是不要用env命令。
+ eg: printenv HOME 
+ echo $HOME
+ 
+5、局部环境变量
+ set set命令会显示为某个特定进程设置的所有环境变量，包括局部变量、全局变量以及用户定义变量
+ 
+ 5、1 设置用户定义变量
+ 一旦启动了bash shell（或者执行一个shell脚本），就能创建在这个shell进程内可见的局部变
+ 量了。可以通过等号给环境变量赋值，值可以是数值或字符串。
+ my_variable=Hello
+ echo $my_variable
+ 非常简单！现在每次引用my_variable 环境变量的值，只要通过$my_variable引用即可。
+ 如果要给变量赋一个含有空格的字符串值，必须用单引号来界定字符串的首和尾。 
+ 
+ 5、2 设置全局环境变量
+ my_variable="I am Global now"
+ export my_variable 
+ 
+ 5、3 删除环境变量
+  unset my_variable
+ 5、4 设置 PATH 环境变量
+  echo $PATH
+  
+6、定位系统环境变量  
+ $HOME表示的是某个用户的主目录。它和波浪号（~）的作用一样
+ 1. /etc/profile文件
+ 针对用户的启动文件 提供一个用户专属的启动文件来定义该用户所用到的环境变量
+ 2.$HOME/.bash_profile
+? $HOME/.bashrc
+? $HOME/.bash_login
+? $HOME/.profile
+ shell会按照按照下列顺序，运行第一个被找到的文件，余下的则被忽略：
+ $HOME/.bash_profile
+ $HOME/.bash_login
+ $HOME/.profile
+ 注意，这个列表中并没有$HOME/.bashrc文件。这是因为该文件通常通过其他文件运行的。
+ 
+6、1 交互式 shell 进程
+	
