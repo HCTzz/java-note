@@ -54,3 +54,19 @@ crontab -e 添加定时任务  40 23 * * * /usr/local/mysql_sh/mysqlback.sh
 
 
 lrzsz文件传输。
+
+
+
+centos初始化网络：
+https://blog.csdn.net/qq_32801733/article/details/81434165
+
+
+ubuntu安装jdk:
+卸载：https://www.cnblogs.com/happyflyingpig/p/8068020.html
+1、sudo vim /etc/profile
+#set java env
+export JAVA_HOME=/usr/lib/jdk/jdk1.8.0_201
+export JRE_HOME=${JAVA_HOME}/jre    
+export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib    
+export PATH=${JAVA_HOME}/bin:$PATH 
+2、source /etc/profile 
