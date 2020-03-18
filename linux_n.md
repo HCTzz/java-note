@@ -72,6 +72,7 @@ export PATH=${JAVA_HOME}/bin:$PATH
 
 
 
+
 linux文件句柄导致的吞吐量问题。
 1、limit -a    
 当前session生效ulimit -n 2048
