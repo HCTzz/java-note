@@ -49,7 +49,6 @@ if [ -d $BACKUP_DIR$seven_day_ago ] ;
 then
 	rm -rf $BACKUP_DIR$seven_day_ago
 fi
-
 crontab -e 添加定时任务  40 23 * * * /usr/local/mysql_sh/mysqlback.sh
 
 
@@ -70,3 +69,12 @@ export JRE_HOME=${JAVA_HOME}/jre
 export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib    
 export PATH=${JAVA_HOME}/bin:$PATH 
 2、source /etc/profile 
+
+
+
+linux文件句柄导致的吞吐量问题。
+1、limit -a    
+当前session生效ulimit -n 2048
+2、修改linux系统参数。vi /etc/security/limits.conf
+*　　soft　　nofile　　65536
+*　　hard　　nofile　　65536
