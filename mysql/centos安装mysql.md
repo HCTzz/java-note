@@ -40,3 +40,19 @@ gpgkey=：校验文件路径
 
 安装指定版本(5.6)MySQL，即可。
 yum install mysql-community-server.x86_64 -y
+
+
+二、数据库设置
+1、systemctl start  mysqld.service  systemctl status mysqld.service
+2、grep "password" /var/log/mysqld.log
+3、mysql -uroot -p
+4、set password for root@localhost = password('123');
+5、 SHOW VARIABLES LIKE 'validate_password%'; 查看密码设置规则
+6、yum -y remove mysql57-community-release-el7-10.noarch
+
+7、systemctl enable（disabled） mysqld 开机启动
+8、vi /etc/my.cnf #添加 [mysqld] character_set_server=utf8 init_connect='SET NAMES utf8'
+
+update user set host='%' where user='root';
+update user set password=PASSWORD('这里输入你的新密码要用单引号') where user='root';
+flush privileges

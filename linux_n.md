@@ -79,3 +79,30 @@ linux文件句柄导致的吞吐量问题。
 2、修改linux系统参数。vi /etc/security/limits.conf
 *　　soft　　nofile　　65536
 *　　hard　　nofile　　65536
+
+
+
+防火墙
+执行firewall-cmd --permanent --zone=public --add-port=3306/tcp，提示FirewallD is not running，如下图所示。
+centos出现“FirewallD is not running”怎么办
+通过systemctl status firewalld查看firewalld状态，发现当前是dead状态，即防火墙未开启
+centos出现“FirewallD is not running”怎么办
+通过systemctl start firewalld开启防火墙，没有任何提示即开启成功。
+centos出现“FirewallD is not running”怎么办
+再次通过systemctl status firewalld查看firewalld状态，显示running即已开启了。
+centos出现“FirewallD is not running”怎么办
+5
+如果要关闭防火墙设置，可能通过systemctl stop firewalld这条指令来关闭该功能。
+centos出现“FirewallD is not running”怎么办
+6
+再次执行执行firewall-cmd --permanent --zone=public --add-port=3306/tcp，提示success，表示设置成功，这样就可以继续后面的设置了。
+
+head -n 100 查看100行
+tail -n 100 末尾100行
+tail -n +100 从第一百行开始
+【一】从第3000行开始，显示1000行。即显示3000~3999行
+cat filename | tail -n +3000 | head -n 1000
+【二】显示1000行到3000行
+cat filename| head -n 3000 | tail -n +1000  
+【三】用sed命令
+ sed -n '5,10p' filename 这样你就可以只查看文件的第5行到第10行。
