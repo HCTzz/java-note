@@ -25,3 +25,12 @@
 	3、${},配置文件中的值
 		1、@PropertySource 导入配置文件 @PropertySource("classpath:xxx.properties")
 		2、@Value("${key}")
+		
+		
+		
+事件：
+	1、ApringApplicationRunListener
+	2、ApplicationContextInitializer
+	3、ApplicationRunner
+	4、CommandLineRunner
+		

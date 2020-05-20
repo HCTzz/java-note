@@ -1,3 +1,4 @@
+--privileged=true	解决docker启动数据卷权限问题
 查看版本号：
 1、uname -r
 2、cat /etc/redhat-release
@@ -102,7 +103,7 @@ docker常用命令
 		4、分层的镜像   
 		5、为什么采用分层的镜像：共享资源
 		镜像的操作：
-			1、docker commit -m=修改信息  -a=作者 容器ID:TAG
+			1、docker commit -m=修改信息  -a=作者 容器ID 容器名:TAG
 			
 五、容器数据卷：持久化	+ 数据共享		
 		1、卷就是目录或文件，存在与一个或多个容器中，由docker挂在到容器，但不属于联合文件系统。
@@ -156,7 +157,34 @@ docker常用命令
 			11、ENTRYPOINT  多个都会生效，追加方式
 			12、ONBUILD 当构件一个被继承的DOCKERFILE时运行命令	
 		3、docker history 镜像ID   查看容器历史
-			
-			
+		
+自定义tomcat:
+	1、创建tomcat文件夹
+	2、建立 c.txt文件（只是为了演示copy关键字）
+	
+	3、将jdk和tomcat安装的压缩包拷贝进上一部目录	
+	4、建立Dockerfile文件
+		FORM centos
+		MAINTAINER   HHF<ctt9342@gmail.com>
+		COPY x.txt /usr/local/c.txt
+		ADD jdk.tar.gz /usr/local/
+		ADD tomcat.tar.gz /usr/local/
+		RUN yum -y install vim
+		ENV MAINPATH /usr/local/
+		WORKDIR $MYPATH
+		ENV JAVA_HOME /usr/local/jdk
+		ENV CLASSPATH $JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+		ENV CATALINA_HOME /usr/local/tomcat
+		ENV CATALINA_BASE /usr/local/tomcat
+		ENV PATH $PATH:$JAVA_HOME/bin:$CATALINA_HOME/lib:$CATALINA_HOME/bin
+		EXPOSE 8080
+		#ENTRYPOINT ["/usr/local/tomcat/bin/startup.sh"]
+		#CMD ["/usr/local/tomcat/bin/catalina.sh","run"]
+		CMD /usr/local/tomcat/bin/startup.sh && tail -F /usr/local/tocmat/bin/logs/catalina.out 
+	5、构建过程设置环境变量
+		docker bulid -f /dockerfile路径 -t 镜像名
+	6、run 启动
+	7、验证
+	8、发布服务
 			
 			

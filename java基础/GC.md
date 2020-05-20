@@ -1,3 +1,15 @@
+minor GC : 年轻代   当年轻代满时就会触发Minor GC，这里的年轻代满指的是Eden代满，Survivor满不会引发GC。
+Full /Major  GC：老年代不同的垃圾收集器收集算法不同。
+	●  Major GC 收集清理老年代，基本由Minor GC触发 （复制算法）
+	●  Full  GC 收集young gen（年轻代）、old gen（老年代）、perm gen（永久代/元空间）
+	（1）调用System.gc时，系统建议执行Full GC，但是不必然执行
+	（2）老年代空间不足
+	（3）方法区空间不足
+	（4）通过Minor GC后进入老年代的平均大小大于老年代的可用内存
+	（5）由Eden区、survivor space1（From Space）区向survivor space2（To Space）区复制时，对象大小大于To Space可用内存，则把该对象转存到老年代，且老年代的可用内存小于该对象大小
+	 当永久代满时也会引发Full GC，会导致Class、Method元信息的卸载。
+
+
 1.1 对象优先在 eden 区分配
 目前主流的垃圾收集器都会采用分代回收算法，因此需要将堆内存分为新生代和老年代，这样我们就可以根据各个年代的特点选择合适的垃圾收集算法。
 

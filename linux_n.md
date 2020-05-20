@@ -28,7 +28,7 @@ service network restart
 5、mysql缺少命令 ：find  / -name mysql -print
                    ln -fs /usr/local/mysql/bin/mysqldump /usr/bin  
 
-6、设置时间：1、yum install ntp 2、ntpdate ntp.api.bz  时区：/etc/share/zoneinfo/Shanghai
+6、设置时间：1、yum install ntp 2、ntpdate ntp.api.bz  时区：/etc/share/zoneinfo/Shanghai  /etc/localtime
 
 7、设置自动备份：
 #!/bin/bash
@@ -62,6 +62,9 @@ https://blog.csdn.net/qq_32801733/article/details/81434165
 
 ubuntu安装jdk:
 卸载：https://www.cnblogs.com/happyflyingpig/p/8068020.html
+1、rpm -qa | grep jdk
+2、rpm -e --nodeps +版本号
+安装：
 1、sudo vim /etc/profile
 #set java env
 export JAVA_HOME=/usr/lib/jdk/jdk1.8.0_201
