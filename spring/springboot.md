@@ -1,3 +1,4 @@
+nohup java -jar xxxx.jar >/dev/null 2>&1&
 yaml语法：
 	1、k: v
 	2、Map 数据 ： 
@@ -59,6 +60,7 @@ Profile 多环境配置文件 spring.profiles.active=dev
 2、refreshContext(context) springboot 刷新IOC容器【创建IOC容器对象，并初始化容器】
 3、refresh(context);
 4、onRefresh()
+	1、invokeBeanFactoryPostProcessors 加载所有的BEAN DEFINITION（bean定义）
 5、webIOC容器会创建嵌入式的servlet容器
 6、createEmbeddedServletContainer
 

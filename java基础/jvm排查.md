@@ -75,7 +75,7 @@
      top除了看一些基本信息之外，剩下的就是配合来查询vm的各种问题了  
          ```java
            ps -ef | grep java
-           top -H -p pid
+           top -Hp pid
          ``` 
        获得线程10进制转16进制后jstack去抓看这个线程到底在干啥
    
