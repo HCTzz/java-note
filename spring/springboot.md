@@ -64,7 +64,4 @@ Profile 多环境配置文件 spring.profiles.active=dev
 5、webIOC容器会创建嵌入式的servlet容器
 6、createEmbeddedServletContainer
 
-使用外部容器
-1、
-2、
-3、
+nohup java -Dloader.path='lib/' -jar hmc.jar >/dev/null 2>&1&
