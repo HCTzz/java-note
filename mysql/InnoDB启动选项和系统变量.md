@@ -1,3 +1,19 @@
+# 配置
+
+```mysql
+1、查找my.cnf mysql --help | grep 'Default options' -A 1
+2、查看最新一个binlog日志的编号名称，及其最后一个操作事件结束点 show master status;
+3、刷新log日志，立刻产生一个新编号的binlog日志文件，跟重启一个效果 flush logs;
+4、清空所有binlog日志 reset master;
+5、日志查看，因为是二进制文件没法用vi等打开，可以用mysql的mysqlbinlog打开，/usr/bin/mysqlbinlog /home/logs/mysql-bin.000001
+```
+
+
+
+
+
+
+
 # InnoDB启动选项和系统变量
 
 - 系统变量true或false可以在服务器启动时通过命名来启用，也可以使用`--skip-`前缀禁用 。例如，要启用或禁用`InnoDB`自适应哈希索引，可以 在命令行上使用 [`--innodb-adaptive-hash-index`](https://dev.mysql.com/doc/refman/5.6/en/innodb-parameters.html#sysvar_innodb_adaptive_hash_index)或 [`--skip-innodb-adaptive-hash-index`](https://dev.mysql.com/doc/refman/5.6/en/innodb-parameters.html#sysvar_innodb_adaptive_hash_index)， [`innodb_adaptive_hash_index`](https://dev.mysql.com/doc/refman/5.6/en/innodb-parameters.html#sysvar_innodb_adaptive_hash_index)或者 `skip_innodb_adaptive_hash_index`在选项文件中使用。
