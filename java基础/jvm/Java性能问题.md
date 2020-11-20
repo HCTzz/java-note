@@ -1,5 +1,7 @@
 
 
+
+
 # top
 
   top命令是我们最常用的Linux命令之一，它可以实时的显示当前正在执行的进程的CPU使用率，
@@ -291,6 +293,8 @@ jmap（Memory Map for Java）命令用于生成堆转储快照（一般称为hea
 
 jmap[option]vmid
 
+要注意的是在使用CMS GC 情况下，jmap -heap的执行有可能会导致JAVA 进程挂起
+
     -dump 生成java堆转储快照，格式为：-dump:[live,]format=b,file=<filename>,其中live子参数说明是否只dump出存活的对象。
     -finalizerinfo 显示在F-Queue中等待Finalize方法的对象，只在Linux/Solaris平台下有用。
     -heap 显示java堆详细信息，如使用哪种回收器、参数配置、分代状况等，只在Linux/Solaris平台下有用。
@@ -373,7 +377,7 @@ VisualVM基于NetBeans平台开发，因此它一开始就具备了插件扩展�
 
   
 
-## 实例：
+# 实例：
 ### CPU占满
 ```
 1、top -Hp 32805 查看Java线程情况

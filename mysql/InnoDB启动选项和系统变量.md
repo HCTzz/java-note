@@ -8,9 +8,11 @@
 5、日志查看，因为是二进制文件没法用vi等打开，可以用mysql的mysqlbinlog打开，/usr/bin/mysqlbinlog /home/logs/mysql-bin.000001
 ```
 
+**配置全局变量**
 
-
-
+```mysql
+mysql > set global innodb_online_alter_log_max_size=402653184;
+```
 
 
 
