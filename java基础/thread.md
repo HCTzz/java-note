@@ -1,13 +1,12 @@
-LockSupport.park();×èÈûµ±Ç°Ïß³Ì
-LockSupport.unpark();È¡Ïû×èÈû£»
-Thread.sleep();×èÈûµ±Ç°Ïß³Ì£¨¿ÉÓÉThread.interrupted()ÖĞ¶Ï£©
-Thread.interrupted();»áÖØÖÃµ±Ç°Ïß³ÌµÄ×´Ì¬£»
+LockSupport.park();é˜»å¡å½“å‰çº¿ç¨‹
+LockSupport.unpark();å–æ¶ˆé˜»å¡ï¼›
+Thread.sleep();é˜»å¡å½“å‰çº¿ç¨‹ï¼ˆå¯ç”±Thread.interrupted()ä¸­æ–­ï¼‰
+Thread.interrupted();ä¼šé‡ç½®å½“å‰çº¿ç¨‹çš„çŠ¶æ€ï¼›
 
-
-//ÉèÖÃÏß³Ì³ØÊı   CompletableFuture
+//è®¾ç½®çº¿ç¨‹æ± æ•°   CompletableFuture
 System.getProperty("java.util.concurrent.ForkJoinPool.common.parallelism");
 
 ## LinkedBlockingQueue
-µ±CÎªÁãÊ±ËµÃ÷ÓĞTAKE²Ù×÷ÒÑ¾­±»×èÈû£¬Ë÷Òı¿¼ÂÇĞÔÄÜÎÊÌâ£¬ÅĞ¶ÏC==0Ôò»ñÈ¡takeËøÍ¨ÖªtakeÏß³ÌÈ¥»ñÈ¡
+å½“Cä¸ºé›¶æ—¶è¯´æ˜æœ‰TAKEæ“ä½œå·²ç»è¢«é˜»å¡ï¼Œç´¢å¼•è€ƒè™‘æ€§èƒ½é—®é¢˜ï¼Œåˆ¤æ–­C==0åˆ™è·å–takeé”é€šçŸ¥takeçº¿ç¨‹å»è·å–
 if (c == 0)
             signalNotEmpty();

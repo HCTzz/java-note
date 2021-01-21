@@ -23,7 +23,7 @@ binlog是Mysql sever层维护的一种二进制日志，与innodb引擎中的red
 配置 `log-bin` 和 `log-bin-index` 的值，如果没有则自行加上去。
 
 ```
-Copylog-bin=mysql-bin
+log-bin=mysql-bin
 log-bin-index=mysql-bin.index
 ```
 

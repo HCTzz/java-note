@@ -33,7 +33,6 @@ docker守护进程运行在主机上，然后通过Socket连接从客户端访�
 1、docker有着比虚拟机更少的抽象层，
 2、socker利用的是宿主机的内核不需要guest os.
 
-
 docker常用命令
 一、帮助命令
 	1、docker version
@@ -71,30 +70,34 @@ docker常用命令
 				containerport
 	2、docker ps 查看运行中的容器	
 	
-	3、容器停止退出
-		1、docker exit  停止并退出
-		2、ctrl + p + q  
-		3、docker attach 重新进入
-	4、启动容器
-		1、docker start 容器ID/容器名
-	5、重启容器
-		1、docker restart 容器ID/容器名
-		2、
-	6、停止容器
-		1、docker stop 容器id/容器名
-		2、docker kill 容器ID/容器名
-	7、删除已停止的容器
-		1、docker rm 容器ID/容器名
-		2、docker rm -f $(docker ps -a -q) / docker ps -a -q | xargs docker rm 删除全部
-	8、重要命令
-		1、启动守护试容器  dockerrun -d 容器名
-		2、查看容器日志 docker logs -f -t --tail 容器id  f:跟随最新的日志打印  t：加入时间戳 --tail:显示最后多少条
-		3、查看容器内运行的进程 docker top
-		4、查看容器内部细节 docker inspect 容器ID/容器名
-		5、进入正在运行的容器并以命令方式交互：
-			1、docker attach 容器ID
-			2、docker exec 容器ID  针对容器执行命令 docker exec -t 容器ID ls -l /tmp
-		6、容器内的数据copy到主机上  docker cp 容器:路径 主机/路径
+
+```sh
+3、容器停止退出
+	1、docker exit  停止并退出
+	2、ctrl + p + q  
+	3、docker attach 重新进入
+4、启动容器
+	1、docker start 容器ID/容器名
+5、重启容器
+	1、docker restart 容器ID/容器名
+	2、
+6、停止容器
+	1、docker stop 容器id/容器名
+	2、docker kill 容器ID/容器名
+7、删除已停止的容器
+	1、docker rm 容器ID/容器名
+	2、docker rm -f $(docker ps -a -q) / docker ps -a -q | xargs docker rm 删除全部
+8、重要命令
+	1、启动守护试容器  dockerrun -d 容器名
+	2、查看容器日志 docker logs -f -t --tail 容器id  f:跟随最新的日志打印  t：加入时间戳 --tail:显示最后多少条
+	3、查看容器内运行的进程 docker top
+	4、查看容器内部细节 docker inspect 容器ID/容器名
+	5、进入正在运行的容器并以命令方式交互：
+		1、docker attach 容器ID
+		2、docker exec 容器ID  针对容器执行命令 docker exec -t 容器ID ls -l /tmp
+			sudo docker exec -i -t nginx-ubuntu-container /bin/bash
+	6、容器内的数据copy到主机上  docker cp 容器:路径 主机/路径
+```
 
 四、Docker镜像
 		1、用来打包软件运行环境和基于运行环境开发的软件
@@ -142,8 +145,9 @@ docker常用命令
 					license="GPLv2" \
 					build-date="2016-06-02"
 				# Default command
-				CMD ["/bin/bash"]						
-			
+​				CMD ["/bin/bash"]						
+​			
+
 			1、FROM 基础镜像，当前镜像基于哪个镜像。
 			2、MAINTAINER 作者加作者的邮箱
 			3、RUN 容器运行的时候需要运行的命令
@@ -157,7 +161,7 @@ docker常用命令
 			11、ENTRYPOINT  多个都会生效，追加方式
 			12、ONBUILD 当构件一个被继承的DOCKERFILE时运行命令	
 		3、docker history 镜像ID   查看容器历史
-		
+
 自定义tomcat:
 	1、创建tomcat文件夹
 	2、建立 c.txt文件（只是为了演示copy关键字）
@@ -186,5 +190,6 @@ docker常用命令
 	6、run 启动
 	7、验证
 	8、发布服务
-			
-			
+
+
+​			
