@@ -10,7 +10,8 @@ yaml语法：
 		k:
 		 - p1: v1
 		 - p2: v2
-		 
+	
+
 将配置文件中配置映射到这个组件中
 1、@ConfigurationProperties(prefix="xxx")	支持JSR303 数据验证 [eg(@Email)]	 
 2、@value 字面量/${key}/#{SpEL} spring 表达式    

@@ -74,7 +74,87 @@ jps[options][hostid]
 
 # iostat
 
-查看磁盘io
+1、查看系统磁盘io
+
+iostat -xdm 1  
+
+iostat -x
+
+![img](E:\learn\git\repository\笔记\java-note\java基础\jvm\img\14213642-6fe59e93a2154ddcafc6fe14d1db25bd.jpg)
+
+rrqm/s: 每秒进行 merge 的读操作数目。即 delta(rmerge)/s
+wrqm/s: 每秒进行 merge 的写操作数目。即 delta(wmerge)/s
+r/s: 每秒完成的读 I/O 设备次数。即 delta(rio)/s
+w/s: 每秒完成的写 I/O 设备次数。即 delta(wio)/s
+rsec/s: 每秒读扇区数。即 delta(rsect)/s
+wsec/s: 每秒写扇区数。即 delta(wsect)/s
+rkB/s: 每秒读K字节数。是 rsect/s 的一半，因为每扇区大小为512字节。
+wkB/s: 每秒写K字节数。是 wsect/s 的一半。
+avgrq-sz: 平均每次设备I/O操作的数据大小 (扇区)。即 delta(rsect+wsect)/delta(rio+wio)
+avgqu-sz: 平均I/O队列长度。即 delta(aveq)/s/1000 (因为aveq的单位为毫秒)。
+await: 平均每次设备I/O操作的等待时间 (毫秒)。即 delta(ruse+wuse)/delta(rio+wio)
+svctm: 平均每次设备I/O操作的服务时间 (毫秒)。即 delta(use)/delta(rio+wio)
+％util: 一秒中有百分之多少的时间用于 I/O 操作，或者说一秒中有多少时间 I/O 队列是非空的。
+即 delta(use)/s/1000 (因为use的单位为毫秒)
+
+如果 ％util 接近 100％，说明产生的I/O请求太多，I/O系统已经满负荷，该磁盘
+可能存在瓶颈。
+
+svctm 一般要小于 await (因为同时等待的请求的等待时间被重复计算了)，
+svctm 的大小一般和磁盘性能有关，CPU/内存的负荷也会对其有影响，请求过多
+也会间接导致 svctm 的增加。await 的大小一般取决于服务时间(svctm) 以及
+I/O 队列的长度和 I/O 请求的发出模式。如果 svctm 比较接近 await，说明
+I/O 几乎没有等待时间；如果 await 远大于 svctm，说明 I/O 队列太长，应用
+得到的响应时间变慢，如果响应时间超过了用户可以容许的范围，这时可以考虑
+更换更快的磁盘，调整内核 elevator 算法，优化应用，或者升级 CPU。
+
+队列长度(avgqu-sz)也可作为衡量系统 I/O 负荷的指标，但由于 avgqu-sz 是
+按照单位时间的平均值，所以不能反映瞬间的 I/O 洪水。
+
+# ifstat
+
+```
+-h, --help           this message
+-a, --ignore         ignore history
+-d, --scan=SECS      sample every statistics every SECS
+-e, --errors         show errors
+-j, --json           format output in JSON
+-n, --nooutput       do history only
+-p, --pretty         pretty print
+-r, --reset          reset history
+-s, --noupdate       don't update history
+-t, --interval=SECS  report average over the last SECS
+-V, --version        output version information
+-z, --zeros          show entries with zero activity
+-x, --extended=TYPE  show extended stats of TYPE
+
+```
+
+ ifstat -t 60
+
+```
+Interface        RX Pkts/Rate    TX Pkts/Rate    RX Data/Rate    TX Data/Rate  
+                 RX Errs/Drop    TX Errs/Drop    RX Over/Rate    TX Coll/Rate  
+lo                     0 0             0 0             0 0             0 0      
+                       0 0             0 0             0 0             0 0      
+eth0                  17 0            11 0          1406 0          1982 0      
+                       0 0             0 0             0 0             0 0      
+docker0                0 0             0 0             0 0             0 0      
+                       0 0             0 0             0 0             0 0      
+vethc290cd1            0 0             0 0             0 0             0 0      
+                       0 0             0 0             0 0             0 0      
+veth7030524            0 0             0 0             0 0             0 0      
+                       0 0             0 0             0 0             0 0      
+
+```
+
+RX Pkts/Rate：数据包接收流量
+
+TX Pkts/Rate：数据包发送流量
+
+RX Data/Rate：数据接收流量
+
+TX Data/Rate  ：数据发送流量
 
 # ps
 
@@ -91,11 +171,12 @@ printf '%x' threadid
 
 # pidstat
   	pidstat 是 Sysstat 中的一个组件，也是一款功能强大的性能监测工具，top 和 vmstat 两个命令都是监测进程的	内存、CPU 以及 I/O 使用情况， 而 pidstat 命令可以检测到线程级别的。pidstat命令线程切换字段说明如下：
-	UID ：被监控任务的真实用户ID。
-	TGID ：线程组ID。
-	TID：线程ID。
-	cswch/s：主动切换上下文次数，这里是因为资源阻塞而切换线程，比如锁等待等情况。
-	nvcswch/s：被动切换上下文次数，这里指CPU调度切换了线程。
+  	UID ：被监控任务的真实用户ID。
+  	TGID ：线程组ID。
+  	TID：线程ID。
+  	cswch/s：主动切换上下文次数，这里是因为资源阻塞而切换线程，比如锁等待等情况。
+  	nvcswch/s：被动切换上下文次数，这里指CPU调度切换了线程。
+  	pidstat -p 87093 -w 1 10
 
 - -u：默认的参数，显示各个进程的cpu使用统计
 
@@ -593,3 +674,4 @@ sy=86，说明内核态占用了86%的CPU，这里明显就是做上下文切换
 ```
 根据上面采集的信息，我们知道Java的线程每秒切换15次左右，正常情况下，应该是个位数或者小数。
 结合这些信息我们可以断定Java线程开启过多，导致频繁上下文切换，从而影响了整体性能。
+

@@ -27,10 +27,26 @@
 		2、@Value("${key}")
 		
 		
-		
+
+​	4、@value 获取值和@configurationProperties区别
+
+​		
+
+|                      | @configurationProperties |   @value   |
+| -------------------- | :----------------------: | :--------: |
+| 功能                 | 批量注入配置文件中的属性 | 一个个指定 |
+| 松散绑定（松散语法） |           支持           |   不支持   |
+| Spel                 |          不支持          |    支持    |
+| JSR303数据校验       |           支持           |   不支持   |
+| 复杂类型封装         |           支持           |   不支持   |
+
+
+
+
 事件：
 	1、ApringApplicationRunListener
 	2、ApplicationContextInitializer
 	3、ApplicationRunner
 	4、CommandLineRunner
 		
+
