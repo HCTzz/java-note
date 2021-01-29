@@ -2,6 +2,8 @@
 
 
 
+
+
 # top
 
   top命令是我们最常用的Linux命令之一，它可以实时的显示当前正在执行的进程的CPU使用率，
@@ -31,31 +33,7 @@
 	# TIME+  进程使用的CPU时间总计，单位1/100秒
 	# COMMAND 命令名/命令行
 
-# vmstat/mpstat
-  vmstat是一个指定周期和采集次数的虚拟内存检测工具，可以统计内存，CPU，swap的使用情况，
-  它还有一个重要的常用功能，用来观察进程的上下文切换。字段说明如下:
-	r: 运行队列中进程数量（当数量大于CPU核数表示有阻塞的线程）
-	b: 等待IO的进程数量
-	swpd: 使用虚拟内存大小
-	free: 空闲物理内存大小
-	buff: 用作缓冲的内存大小(内存和硬盘的缓冲区)
-	cache: 用作缓存的内存大小（CPU和内存之间的缓冲区）
-	si: 每秒从交换区写到内存的大小，由磁盘调入内存
-	so: 每秒写入交换区的内存大小，由内存调入磁盘
-	bi: 每秒读取的块数
-	bo: 每秒写入的块数
-	in: 每秒中断数，包括时钟中断。
-	cs: 每秒上下文切换数。
-	us: 用户进程执行时间百分比(user time)
-	sy: 内核系统进程执行时间百分比(system time)
-	wa: IO等待时间百分比
-	id: 空闲时间百分比
 
-mpstat(-P ALL 2 每两秒打印一次)
-
-# free
-
-查看内存
 
 # jps
 
@@ -70,100 +48,6 @@ jps[options][hostid]
 2. -m	输出虚拟机进程启动时传递到主类main()函数的参数。
 3. -l	输出主类的全名，如果进程执行的是jar包，输出jar路径
 4. -v	输出虚拟机进程启动时的JVM参数
-```
-
-# iostat
-
-1、查看系统磁盘io
-
-iostat -xdm 1  
-
-iostat -x
-
-![img](E:\learn\git\repository\笔记\java-note\java基础\jvm\img\14213642-6fe59e93a2154ddcafc6fe14d1db25bd.jpg)
-
-rrqm/s: 每秒进行 merge 的读操作数目。即 delta(rmerge)/s
-wrqm/s: 每秒进行 merge 的写操作数目。即 delta(wmerge)/s
-r/s: 每秒完成的读 I/O 设备次数。即 delta(rio)/s
-w/s: 每秒完成的写 I/O 设备次数。即 delta(wio)/s
-rsec/s: 每秒读扇区数。即 delta(rsect)/s
-wsec/s: 每秒写扇区数。即 delta(wsect)/s
-rkB/s: 每秒读K字节数。是 rsect/s 的一半，因为每扇区大小为512字节。
-wkB/s: 每秒写K字节数。是 wsect/s 的一半。
-avgrq-sz: 平均每次设备I/O操作的数据大小 (扇区)。即 delta(rsect+wsect)/delta(rio+wio)
-avgqu-sz: 平均I/O队列长度。即 delta(aveq)/s/1000 (因为aveq的单位为毫秒)。
-await: 平均每次设备I/O操作的等待时间 (毫秒)。即 delta(ruse+wuse)/delta(rio+wio)
-svctm: 平均每次设备I/O操作的服务时间 (毫秒)。即 delta(use)/delta(rio+wio)
-％util: 一秒中有百分之多少的时间用于 I/O 操作，或者说一秒中有多少时间 I/O 队列是非空的。
-即 delta(use)/s/1000 (因为use的单位为毫秒)
-
-如果 ％util 接近 100％，说明产生的I/O请求太多，I/O系统已经满负荷，该磁盘
-可能存在瓶颈。
-
-svctm 一般要小于 await (因为同时等待的请求的等待时间被重复计算了)，
-svctm 的大小一般和磁盘性能有关，CPU/内存的负荷也会对其有影响，请求过多
-也会间接导致 svctm 的增加。await 的大小一般取决于服务时间(svctm) 以及
-I/O 队列的长度和 I/O 请求的发出模式。如果 svctm 比较接近 await，说明
-I/O 几乎没有等待时间；如果 await 远大于 svctm，说明 I/O 队列太长，应用
-得到的响应时间变慢，如果响应时间超过了用户可以容许的范围，这时可以考虑
-更换更快的磁盘，调整内核 elevator 算法，优化应用，或者升级 CPU。
-
-队列长度(avgqu-sz)也可作为衡量系统 I/O 负荷的指标，但由于 avgqu-sz 是
-按照单位时间的平均值，所以不能反映瞬间的 I/O 洪水。
-
-# ifstat
-
-```
--h, --help           this message
--a, --ignore         ignore history
--d, --scan=SECS      sample every statistics every SECS
--e, --errors         show errors
--j, --json           format output in JSON
--n, --nooutput       do history only
--p, --pretty         pretty print
--r, --reset          reset history
--s, --noupdate       don't update history
--t, --interval=SECS  report average over the last SECS
--V, --version        output version information
--z, --zeros          show entries with zero activity
--x, --extended=TYPE  show extended stats of TYPE
-
-```
-
- ifstat -t 60
-
-```
-Interface        RX Pkts/Rate    TX Pkts/Rate    RX Data/Rate    TX Data/Rate  
-                 RX Errs/Drop    TX Errs/Drop    RX Over/Rate    TX Coll/Rate  
-lo                     0 0             0 0             0 0             0 0      
-                       0 0             0 0             0 0             0 0      
-eth0                  17 0            11 0          1406 0          1982 0      
-                       0 0             0 0             0 0             0 0      
-docker0                0 0             0 0             0 0             0 0      
-                       0 0             0 0             0 0             0 0      
-vethc290cd1            0 0             0 0             0 0             0 0      
-                       0 0             0 0             0 0             0 0      
-veth7030524            0 0             0 0             0 0             0 0      
-                       0 0             0 0             0 0             0 0      
-
-```
-
-RX Pkts/Rate：数据包接收流量
-
-TX Pkts/Rate：数据包发送流量
-
-RX Data/Rate：数据接收流量
-
-TX Data/Rate  ：数据发送流量
-
-# ps
-
-``` 
-ps -mp  进程ID -o THREAD ,tid ,time
--m 显示所有的线程
--p pid 进程使用cpu的时间
--o 该参数后是用户自定义格式
-printf '%x' threadid
 ```
 
 
@@ -384,6 +268,8 @@ jstat-gc 2764 250 20
   它可以检测java程序运行的实时情况，包括堆内存信息和垃圾回收信息，我们常常用来查看程序垃圾回收情况。
   常用的命令是jstat -gc pid。信息字段说明如下：
 
+![image-20210129110921699](E:\learn\git\repository\笔记\java-note\java基础\jvm\img\image-20210129110921699.png)
+
 ```
 S0C：年轻代中 To Survivor 的容量（单位 KB）；
 S1C：年轻代中 From Survivor 的容量（单位 KB）；
@@ -416,6 +302,7 @@ S0 S1 E O P YGC YGCT FGC FGCT GCT
 
 ```
 jmap[option]vmid
+jmap -histo:live
 ```
 
 jmap（Memory Map for Java）命令用于生成堆转储快照（一般称为heapdump或dump文 件）。如果不使用jmap命令，要想获取Java堆转储快照，还有一些比较“暴力”的手段：譬如 在第2章中用过的-XX：+HeapDumpOnOutOfMemoryError参数，可以让虚拟机在OOM异常出 现之后自动生成dump文件，通过-XX：+HeapDumpOnCtrlBreak参数则可以使用[Ctrl]+[Break] 键让虚拟机生成dump文件，又或者在Linux系统下通过Kill-3命令发送进程退出信号“吓唬”一 下虚拟机，也能拿到dump文件。 jmap的作用并不仅仅是为了获取dump文件，它还可以查询finalize执行队列、Java堆和永 久代的详细信息，如空间使用率、当前用的是哪种收集器等。 和jinfo命令一样，jmap有不少功能在Windows平台下都是受限的，除了生成dump文件的dump选项和用于查看每个类的实例、空间占用统计的-histo选项在所有操作系统都提供之 外，其余选项都只能在Linux/Solaris下使用。
@@ -506,7 +393,27 @@ VisualVM基于NetBeans平台开发，因此它一开始就具备了插件扩展�
 
   
 
+# JCONSOLE
+
+![连接 Jconsole](E:\learn\git\repository\笔记\java-note\java基础\jvm\img\1JConsole连接.png)
+
+如果需要使用 JConsole 连接远程进程，可以在远程 Java 程序启动时加上下面这些参数:
+
+```shell
+-Djava.rmi.server.hostname=外网访问 ip 地址 
+-Dcom.sun.management.jmxremote.port=60001   //监控的端口号
+-Dcom.sun.management.jmxremote.authenticate=false   //关闭认证
+-Dcom.sun.management.jmxremote.ssl=false
+```
+
+在使用 JConsole 连接时，远程进程地址如下：
+
+```
+外网访问 ip 地址:60001 
+```
+
 # 实例：
+
 ### CPU占满
 ```
 1、top -Hp 32805 查看Java线程情况
@@ -675,3 +582,10 @@ sy=86，说明内核态占用了86%的CPU，这里明显就是做上下文切换
 根据上面采集的信息，我们知道Java的线程每秒切换15次左右，正常情况下，应该是个位数或者小数。
 结合这些信息我们可以断定Java线程开启过多，导致频繁上下文切换，从而影响了整体性能。
 
+cswch/S：自愿上下文切换 
+
+进程无法获取所需资源导致的上下文切换。比如I/O，内存等系统资源不足时就会发生自愿上下文切换。
+
+nvcswch/S：非自愿上下文切换
+
+由于进程时间片时间已到等原因，被系统强制调度，进而发生的上下文切换。

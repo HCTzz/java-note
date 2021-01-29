@@ -1,0 +1,1 @@
+-acodec libmp3lame -r 25 -ar 22050

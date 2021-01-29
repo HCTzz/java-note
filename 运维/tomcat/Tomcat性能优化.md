@@ -162,7 +162,7 @@ CMSInitiatingOccupancyFraction，这个参数设置有很大技巧，基本上�
 
 没关系，一个个来解释
 
-```URIEncoding=”UTF-8”```
+``URIEncoding="UTF-8"``
 
 使得tomcat可以解析含有中文名的文件的url，真方便，不像apache里还有搞个mod_encoding，还要手工编译
 
