@@ -18,7 +18,8 @@ yum install https://get.docker.com/rpm/1.7.1/centos-6/RPMS/x86_64/docker-engine-
 centos7
 docs.docker.com
 
-hello word
+修改镜像源源：/etc/docker/daemon.json,重启docker.
+
 1、阿里云镜像加速地址  https://mtuohg4w.mirror.aliyuncs.com
 2、other_args="--registry-mirror=https://mtuohg4w.mirror.aliyuncs.com"
 3、ps ef|grep docker 
@@ -191,7 +192,7 @@ docker常用命令
 		#CMD ["/usr/local/tomcat/bin/catalina.sh","run"]
 		CMD /usr/local/tomcat/bin/startup.sh && tail -F /usr/local/tocmat/bin/logs/catalina.out 
 	5、构建过程设置环境变量
-		docker bulid -f /dockerfile路径 -t 镜像名
+		docker bulid -f /dockerfile路径 -t 镜像名  --build-arg  参数名=参数值 .
 	6、run 启动
 	7、验证
 	8、发布服务
