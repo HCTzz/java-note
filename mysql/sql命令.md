@@ -936,3 +936,19 @@ OPTIMIZE [LOCAL | NO_WRITE_TO_BINLOG] TABLE tbl_name [, tbl_name] ...
 6. SQL对大小写不敏感
 7. 清除已有语句：\c
 ```
+
+### 查询相邻数据的差值
+
+```sql
+SELECT t1.score ,t2.score ,(t1.score - t2.score),t1.id,t2.id
+FROM
+(SELECT @rownum:=@rownum+1 rn1,score,id
+from exam_assign_info,(SELECT @rownum:=0)rownum
+WHERE user_id = '10') t1,
+(SELECT @rownum2:=@rownum2+1 rn2,score,id
+from exam_assign_info,(SELECT @rownum2:=0)rownum2
+WHERE user_id = '10')t2
+WHERE rn1 = rn2 -1
+
+```
+

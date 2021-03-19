@@ -1,6 +1,9 @@
+```
+-XX:-RestrictContended
+@sun.misc.Contended 处理伪共享问题
+```
 
-
-
+   
 
 
 

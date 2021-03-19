@@ -1,53 +1,58 @@
 
-# ĞŞ¸ÄrootÃÜÂë:
+# ä¿®æ”¹rootå¯†ç :
 	su 
 	sudo passwd
 
-# ²é¿´×î´óÎÄ¼ş¾ä±úÊı
+# æŸ¥çœ‹æœ€å¤§æ–‡ä»¶å¥æŸ„æ•°
 	sysctl -a | grep fs.file-max
 	ulimit -n
 	netstat -natp
-	
-# linuxÎÄ¼ş¾ä±úµ¼ÖÂµÄÍÌÍÂÁ¿ÎÊÌâ¡£
-	1¡¢limit -a    
-	µ±Ç°sessionÉúĞ§ulimit -n 2048
-	2¡¢ĞŞ¸ÄlinuxÏµÍ³²ÎÊı¡£
+
+# linuxæ–‡ä»¶å¥æŸ„å¯¼è‡´çš„ååé‡é—®é¢˜ã€‚
+	1ã€limit -a    
+	å½“å‰sessionç”Ÿæ•ˆulimit -n 2048
+	2ã€ä¿®æ”¹linuxç³»ç»Ÿå‚æ•°ã€‚
 	vi /etc/security/limits.conf
-	*¡¡¡¡soft¡¡¡¡nofile¡¡¡¡65536
-	*¡¡¡¡hard¡¡¡¡nofile¡¡¡¡65536
+	*ã€€ã€€softã€€ã€€nofileã€€ã€€65536
+	*ã€€ã€€hardã€€ã€€nofileã€€ã€€65536
 
-#ÎÒÃÇ¿ÉÒÔÍ¨¹ıvi±à¼­Æ÷À´²é¿´ÎÄ¼şµÄformat¸ñÊ½¡£
-	- 1.Ê×ÏÈÓÃviÃüÁî´ò¿ªÎÄ¼ş
+#æˆ‘ä»¬å¯ä»¥é€šè¿‡viç¼–è¾‘å™¨æ¥æŸ¥çœ‹æ–‡ä»¶çš„formatæ ¼å¼ã€‚
+	- 1.é¦–å…ˆç”¨viå‘½ä»¤æ‰“å¼€æ–‡ä»¶
 	[root@localhost test]# vim test.sh  
-	- 2.ÔÚviÃüÁîÄ£Ê½ÖĞÊ¹ÓÃ :set ff ÃüÁî ¿ÉÒÔ¿´µ½¸ÄÎÄ¼şµÄ¸ñÊ½Îª fileformat=dos
-	- 3.ĞŞ¸ÄÎÄ¼şformatÎªunix
-	Ê¹ÓÃvi/vimĞŞ¸ÄÎÄ¼şformat ÃüÁî£º:set ff=unix »òÕß£º:set fileformat=unix
-	È»ºó:wq±£´æÍË³ö¾Í¿ÉÒÔÁË
+	- 2.åœ¨viå‘½ä»¤æ¨¡å¼ä¸­ä½¿ç”¨ :set ff å‘½ä»¤ å¯ä»¥çœ‹åˆ°æ”¹æ–‡ä»¶çš„æ ¼å¼ä¸º fileformat=dos
+	- 3.ä¿®æ”¹æ–‡ä»¶formatä¸ºunix
+	ä½¿ç”¨vi/vimä¿®æ”¹æ–‡ä»¶format å‘½ä»¤ï¼š:set ff=unix æˆ–è€…ï¼š:set fileformat=unix
+	ç„¶å:wqä¿å­˜é€€å‡ºå°±å¯ä»¥äº†
 
-# centos ÍøÂçÎÊÌâ£¨ÓëÕı³£·şÎñÆ÷¶Ô±ÈĞŞ¸Ä£©£º
+# centos ç½‘ç»œé—®é¢˜ï¼ˆä¸æ­£å¸¸æœåŠ¡å™¨å¯¹æ¯”ä¿®æ”¹ï¼‰ï¼š
+
+/etc/sysconfig/network-scripts/if-cfg-eth0
+
 	vim /etc/sysconfig/network-scripts/ifcfg-eth0
 	vim /etc/resolv.conf
 	service network restart
+
+![img](E:\learn\git\repository\ç¬”è®°\java-note\linux\img\20180810185813333)
 
 # scp -r xxx root@xx.xx:/user/......
 
 # uname 
 
-# mysqlÈ±ÉÙÃüÁî £º
+# mysqlç¼ºå°‘å‘½ä»¤ ï¼š
 	find  / -name mysql -print
-    ln -fs /usr/local/mysql/bin/mysqldump /usr/bin  
+	ln -fs /usr/local/mysql/bin/mysqldump /usr/bin  
 
-# ÉèÖÃÊ±¼ä£º
-	1¡¢yum install ntp 
-	2¡¢ntpdate ntp.api.bz  
-	Ê±Çø£º/etc/share/zoneinfo/Shanghai  /etc/localtime
+# è®¾ç½®æ—¶é—´ï¼š
+	1ã€yum install ntp 
+	2ã€ntpdate ntp.api.bz  
+	æ—¶åŒºï¼š/etc/share/zoneinfo/Shanghai  /etc/localtime
 
-# ÉèÖÃ×Ô¶¯±¸·İ£º
+# è®¾ç½®è‡ªåŠ¨å¤‡ä»½ï¼š
 	#!/bin/bash
 	userName="root"
 	password="123456"
 	dataBase="zeln"
- 
+	 
 	DATE=`date '+%Y%m%d'`
 	BACKUP_DIR="/home/mysql_back/"
 	seven_day_ago=`date +%Y%m%d --date '7 days ago'`
@@ -61,50 +66,47 @@
 	then
 		rm -rf $BACKUP_DIR$seven_day_ago
 	fi
-	
+
 # crontab -e 
-	Ìí¼Ó¶¨Ê±ÈÎÎñ  40 23 * * * /usr/local/mysql_sh/mysqlback.sh
+	æ·»åŠ å®šæ—¶ä»»åŠ¡  40 23 * * * /usr/local/mysql_sh/mysqlback.sh
 
 
-lrzszÎÄ¼ş´«Êä¡£
+lrzszæ–‡ä»¶ä¼ è¾“ã€‚
 
-# centos³õÊ¼»¯ÍøÂç£º
-https://blog.csdn.net/qq_32801733/article/details/81434165
-
-# ubuntu°²×°jdk:
-	Ğ¶ÔØ£ºhttps://www.cnblogs.com/happyflyingpig/p/8068020.html
-	1¡¢rpm -qa | grep jdk
-	2¡¢rpm -e --nodeps +°æ±¾ºÅ
-	°²×°£º
-	1¡¢sudo vim /etc/profile
+# ubuntuå®‰è£…jdk:
+	å¸è½½ï¼šhttps://www.cnblogs.com/happyflyingpig/p/8068020.html
+	1ã€rpm -qa | grep jdk
+	2ã€rpm -e --nodeps +ç‰ˆæœ¬å·
+	å®‰è£…ï¼š
+	1ã€sudo vim /etc/profile
 	#set java env
 	export JAVA_HOME=/usr/local/java/jdk
 	export JRE_HOME=${JAVA_HOME}/jre    
 	export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib    
 	export PATH=${JAVA_HOME}/bin:$PATH 
-	2¡¢source /etc/profile 
+	2ã€source /etc/profile 
 
-# ·À»ğÇ½
-	Ö´ĞĞfirewall-cmd --permanent --zone=public --add-port=3306/tcp£¬ÌáÊ¾FirewallD is not running£¬ÈçÏÂÍ¼ËùÊ¾¡£
-	centos³öÏÖ¡°FirewallD is not running¡±ÔõÃ´°ì
-	Í¨¹ısystemctl status firewalld²é¿´firewalld×´Ì¬£¬·¢ÏÖµ±Ç°ÊÇdead×´Ì¬£¬¼´·À»ğÇ½Î´¿ªÆô
-	centos³öÏÖ¡°FirewallD is not running¡±ÔõÃ´°ì
-	Í¨¹ısystemctl start firewalld¿ªÆô·À»ğÇ½£¬Ã»ÓĞÈÎºÎÌáÊ¾¼´¿ªÆô³É¹¦¡£
-	centos³öÏÖ¡°FirewallD is not running¡±ÔõÃ´°ì
-	ÔÙ´ÎÍ¨¹ısystemctl status firewalld²é¿´firewalld×´Ì¬£¬ÏÔÊ¾running¼´ÒÑ¿ªÆôÁË¡£
-	centos³öÏÖ¡°FirewallD is not running¡±ÔõÃ´°ì
+# é˜²ç«å¢™
+	æ‰§è¡Œfirewall-cmd --permanent --zone=public --add-port=3306/tcpï¼Œæç¤ºFirewallD is not runningï¼Œå¦‚ä¸‹å›¾æ‰€ç¤ºã€‚
+	centoså‡ºç°â€œFirewallD is not runningâ€æ€ä¹ˆåŠ
+	é€šè¿‡systemctl status firewalldæŸ¥çœ‹firewalldçŠ¶æ€ï¼Œå‘ç°å½“å‰æ˜¯deadçŠ¶æ€ï¼Œå³é˜²ç«å¢™æœªå¼€å¯
+	centoså‡ºç°â€œFirewallD is not runningâ€æ€ä¹ˆåŠ
+	é€šè¿‡systemctl start firewalldå¼€å¯é˜²ç«å¢™ï¼Œæ²¡æœ‰ä»»ä½•æç¤ºå³å¼€å¯æˆåŠŸã€‚
+	centoså‡ºç°â€œFirewallD is not runningâ€æ€ä¹ˆåŠ
+	å†æ¬¡é€šè¿‡systemctl status firewalldæŸ¥çœ‹firewalldçŠ¶æ€ï¼Œæ˜¾ç¤ºrunningå³å·²å¼€å¯äº†ã€‚
+	centoså‡ºç°â€œFirewallD is not runningâ€æ€ä¹ˆåŠ
 	5
-	Èç¹ûÒª¹Ø±Õ·À»ğÇ½ÉèÖÃ£¬¿ÉÄÜÍ¨¹ısystemctl stop firewalldÕâÌõÖ¸ÁîÀ´¹Ø±Õ¸Ã¹¦ÄÜ¡£
-	centos³öÏÖ¡°FirewallD is not running¡±ÔõÃ´°ì
+	å¦‚æœè¦å…³é—­é˜²ç«å¢™è®¾ç½®ï¼Œå¯èƒ½é€šè¿‡systemctl stop firewalldè¿™æ¡æŒ‡ä»¤æ¥å…³é—­è¯¥åŠŸèƒ½ã€‚
+	centoså‡ºç°â€œFirewallD is not runningâ€æ€ä¹ˆåŠ
 	6
-	ÔÙ´ÎÖ´ĞĞÖ´ĞĞfirewall-cmd --permanent --zone=public --add-port=3306/tcp£¬ÌáÊ¾success£¬±íÊ¾ÉèÖÃ³É¹¦£¬ÕâÑù¾Í¿ÉÒÔ¼ÌĞøºóÃæµÄÉèÖÃÁË¡£
+	å†æ¬¡æ‰§è¡Œæ‰§è¡Œfirewall-cmd --permanent --zone=public --add-port=3306/tcpï¼Œæç¤ºsuccessï¼Œè¡¨ç¤ºè®¾ç½®æˆåŠŸï¼Œè¿™æ ·å°±å¯ä»¥ç»§ç»­åé¢çš„è®¾ç½®äº†ã€‚
 
-# head -n 100 ²é¿´100ĞĞ
-# tail -n 100 Ä©Î²100ĞĞ
-# tail -n +100 ´ÓµÚÒ»°ÙĞĞ¿ªÊ¼
-	1¡¢´ÓµÚ3000ĞĞ¿ªÊ¼£¬ÏÔÊ¾1000ĞĞ¡£¼´ÏÔÊ¾3000~3999ĞĞ
+# head -n 100 æŸ¥çœ‹100è¡Œ
+# tail -n 100 æœ«å°¾100è¡Œ
+# tail -n +100 ä»ç¬¬ä¸€ç™¾è¡Œå¼€å§‹
+	1ã€ä»ç¬¬3000è¡Œå¼€å§‹ï¼Œæ˜¾ç¤º1000è¡Œã€‚å³æ˜¾ç¤º3000~3999è¡Œ
 	cat filename | tail -n +3000 | head -n 1000
-	2¡¢ÏÔÊ¾1000ĞĞµ½3000ĞĞ
+	2ã€æ˜¾ç¤º1000è¡Œåˆ°3000è¡Œ
 	cat filename| head -n 3000 | tail -n +1000  
-	3¡¢ÓÃsedÃüÁî
-	 sed -n '5,10p' filename ÕâÑùÄã¾Í¿ÉÒÔÖ»²é¿´ÎÄ¼şµÄµÚ5ĞĞµ½µÚ10ĞĞ¡£
+	3ã€ç”¨sedå‘½ä»¤
+	 sed -n '5,10p' filename è¿™æ ·ä½ å°±å¯ä»¥åªæŸ¥çœ‹æ–‡ä»¶çš„ç¬¬5è¡Œåˆ°ç¬¬10è¡Œã€‚

@@ -1,13 +1,22 @@
-1¡¢½«±¾µØjar°ü°²×°µ½±¾µØmaven²Ö¿â
+1ã€å°†æœ¬åœ°jaråŒ…å®‰è£…åˆ°æœ¬åœ°mavenä»“åº“
 mvn install:install-file -Dfile=lucene-queryparser-4.6.1.jar -DgroupId=org.apache.lucene -DartifactId=lucene-queryparser -Dversion=4.6.1 -Dpackaging=jar
 
 
-//µÚÒ»²½,´ÓMaven±¾µØ²Ö¿âÉ¾³ıjar
-//Çå³ıÄ³¸öjar
+//ç¬¬ä¸€æ­¥,ä»Mavenæœ¬åœ°ä»“åº“åˆ é™¤jar
+//æ¸…é™¤æŸä¸ªjar
 mvn dependency:purge-local-repository -DmanualInclude="groupId:artifactId"
- 
-//Çå³ı¶à¸öÊôÓÚ²»Í¬groupIdµÄjar
+
+//æ¸…é™¤å¤šä¸ªå±äºä¸åŒgroupIdçš„jar
 mvn dependency:purge-local-repository -DmanualInclude="groupId1:artifactId1,groupId2:artifactId2,..."
- 
-//µÚ¶ş²½,×èÖ¹Maven¶ÔÒÑÉ¾³ıµÄjar½øĞĞreResolve
+
+//ç¬¬äºŒæ­¥,é˜»æ­¢Mavenå¯¹å·²åˆ é™¤çš„jarè¿›è¡ŒreResolve
 mvn dependency:purge-local-repository -DreResolve=false
+
+
+
+# å¤„ç†ä¸‹è½½ä¸äº†æºæ–‡ä»¶çš„é—®é¢˜
+
+```
+mvn dependency:resolve -Dclassifier=sources
+```
+
