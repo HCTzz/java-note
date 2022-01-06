@@ -60,7 +60,7 @@ forEach(
   Arrays.asList(1,2,3,4,5),
   (Integer i) -> System.out.println(i)
  ); 
- 
+
  三、Function
  java.util.function.Function<T, R>接口定义了一个叫作apply的方法，它接受一个泛型T的对象，并返回一个泛型R的对象。
  如果你需要定义一个Lambda，将输入对象的信息映射到输出，就可以使用这个接口（比如提取苹果的重量，或把字符串映射为它的长度）。在下面的
