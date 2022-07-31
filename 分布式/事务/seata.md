@@ -260,3 +260,10 @@ Saga模式是SEATA提供的长事务解决方案，在Saga模式中，业务流�
 ## 缺点：
 
 - 不保证隔离性（应对方案见[用户文档](http://seata.io/zh-cn/docs/user/saga.html)）
+
+
+
+
+一、seata的原理只要是代理数据源，在数据源执行前后执行相关的逻辑。
+	全局事务与分支事务由过滤器实现
+	获取全局锁/生成undo等在数据连接以及预处理对象（PreparedStatementProxy）
