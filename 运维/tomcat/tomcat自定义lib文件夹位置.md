@@ -6,8 +6,11 @@
 ${catalina.home}/conf/catalina.properties
 例子：
 common.loader = ${catalina.home}/lib/ext/*.jar
+
+set JAVA_OPTS=%JAVA_OPTS% %LOGGING_CONFIG%的后面加上 -Dfile.encoding="UTF-8"
 ```
 
 
 
-![img](E:\learn\git\repository\笔记\java-note\运维\tomcat\img\20181108142035867.png)
+![img](.\img\20181108142035867.png)
+
