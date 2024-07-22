@@ -23,7 +23,7 @@ private transient Thread exclusiveOwnerThread; //继承自AbstractOwnableSynchro
 
 AbstractQueuedSynchronizer 的等待队列示意如下所示，注意了，之后分析过程中所说的 queue，也就是阻塞队列**不包含 head，不包含 head，不包含 head**。
 
-![aqs-0](E:\learn\git\repository\笔记\java-note\java基础\并发\img\aqs-0.png)
+![aqs-0](image/aqs-0.png)
 
 等待队列中每个线程被包装成一个 Node 实例，数据结构是链表，一起看看源码吧：
 
@@ -71,7 +71,7 @@ Node 的数据结构其实也挺简单的，就是 thread + waitStatus + pre + n
 
 上面的是基础知识，后面会多次用到，心里要时刻记着它们，心里想着这个结构图就可以了。下面，我们开始说 ReentrantLock 的公平锁。再次强调，我说的阻塞队列不包含 head 节点。
 
-![aqs-0](E:\learn\git\repository\笔记\java-note\java基础\并发\img\aqs-0.png)
+![aqs-0](image/aqs-0-1721609883431.png)
 
 首先，我们先看下 ReentrantLock 的使用方式。
 
@@ -503,11 +503,11 @@ private Node enq(final Node node) {
 
 首先，是线程 2 初始化 head 节点，此时 head==tail, waitStatus==0
 
-![aqs-1](E:\learn\git\repository\笔记\java-note\java基础\并发\img\aqs-1.png)
+![aqs-1](image/aqs-1.png)
 
 然后线程 2 入队：
 
-![aqs-2](E:\learn\git\repository\笔记\java-note\java基础\并发\img\aqs-2.png)
+![aqs-2](image/aqs-2.png)
 
 同时我们也要看此时节点的 waitStatus，我们知道 head 节点是线程 2 初始化的，此时的 waitStatus 没有设置， java 默认会设置为 0，但是到 shouldParkAfterFailedAcquire 这个方法的时候，线程 2 会把前驱节点，也就是 head 的waitStatus设置为 -1。
 
@@ -515,6 +515,6 @@ private Node enq(final Node node) {
 
 如果线程 3 此时再进来，直接插到线程 2 的后面就可以了，此时线程 3 的 waitStatus 是 0，到 shouldParkAfterFailedAcquire 方法的时候把前驱节点线程 2 的 waitStatus 设置为 -1。
 
-![aqs-3](E:\learn\git\repository\笔记\java-note\java基础\并发\img\aqs-3.png)
+![aqs-3](image/aqs-3.png)
 
 这里可以简单说下 waitStatus 中 SIGNAL(-1) 状态的意思，Doug Lea 注释的是：代表后继节点需要被唤醒。也就是说这个 waitStatus 其实代表的不是自己的状态，而是后继节点的状态，我们知道，每个 node 在入队的时候，都会把前驱节点的状态改为 SIGNAL，然后阻塞，等待被前驱唤醒。这里涉及的是两个问题：有线程取消了排队、唤醒操作。其实本质是一样的，读者也可以顺着 “waitStatus代表后继节点的状态” 这种思路去看一遍源码。

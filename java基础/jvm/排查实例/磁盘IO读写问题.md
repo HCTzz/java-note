@@ -47,7 +47,7 @@ svctm：平均每次设备I/O操作的处理时间(毫秒)。警告！不要再�
 # iotop -oP
 ```
 
-![Linux 查找占用磁盘IO读写很高的进程方法Linux 查找占用磁盘IO读写很高的进程方法](E:\learn\git\repository\笔记\java-note\java基础\jvm\排查实例\img\20200209002.png)
+![Linux 查找占用磁盘IO读写很高的进程方法Linux 查找占用磁盘IO读写很高的进程方法](.\img\20200209002.png)
 
 通过这个命令可以看见比较详细信息，如：进程号，磁盘读取量，磁盘写入量，IO百分比，涉及到的命令是什么「两个都是 grep 命令造成的IO读取量大」。
 
@@ -58,6 +58,6 @@ svctm：平均每次设备I/O操作的处理时间(毫秒)。警告！不要再�
 # pidstat -d 1
 ```
 
-![Linux 查找占用磁盘IO读写很高的进程方法Linux 查找占用磁盘IO读写很高的进程方法](E:\learn\git\repository\笔记\java-note\java基础\jvm\排查实例\img\20200209003.png)
+![Linux 查找占用磁盘IO读写很高的进程方法Linux 查找占用磁盘IO读写很高的进程方法](.\img\20200209003.png)
 
 可见其中 grep 命令占用了大量的读IO，之后可根据 PID 查看相关进程信息。
